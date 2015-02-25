@@ -26,3 +26,4 @@ elif len(sys.argv) >= 2:
 		webbrowser.open(urlQuery)
 	finally:
 		os.dup2(savout, 1)
+sys.exit()
