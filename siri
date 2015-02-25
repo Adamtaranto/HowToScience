@@ -1,0 +1,28 @@
+#!/usr/bin/python
+
+import getpass
+import os
+import sys
+import webbrowser
+
+if len(sys.argv) < 2:
+	try:
+		user = getpass.getuser()
+	except:
+		user = 'friend'
+		helloDave = 'Hello ' + user + ', what would you like to know?' 
+	else:
+		helloDave = 'Hello ' + user + ', what would you like to know?' 
+	print helloDave
+
+elif len(sys.argv) >= 2:
+	allArgs = sys.argv[1:]
+	catArgs = '+'.join(allArgs)
+	urlQuery = 'http://lmgtfy.com/?q=' + catArgs
+	savout = os.dup(1)
+	os.close(1)
+	os.open(os.devnull, os.O_RDWR)
+	try:
+		webbrowser.open(urlQuery)
+	finally:
+		os.dup2(savout, 1)
