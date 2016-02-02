@@ -5,9 +5,11 @@ A knowledge engine for new students of bioinformatics.
 
 git clone https://github.com/Adamtaranto/HowToScience.git
 
-sudo ln -s HowToScience/siri /usr/local/bin/siri
+cd HowToScience
 
-sudo ln -s HowToScience/ggl /usr/local/bin/ggl
+sudo cp siri /usr/local/bin/
+
+sudo cp ggl /usr/local/bin/
 
 ##Updating
 
