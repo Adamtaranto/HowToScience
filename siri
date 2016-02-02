@@ -1,24 +1,15 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+#Version 0.0.2 Adam Taranto, February 2015
+#Contact, Adam Taranto, adam.taranto@anu.edu.au
 
 import getpass
 import os
 import sys
 import webbrowser
+from string import whitespace
 
-if len(sys.argv) < 2:
-	try:
-		user = getpass.getuser()
-	except:
-		user = 'friend'
-		helloDave = 'Hello ' + user + ', what would you like to know?' 
-	else:
-		helloDave = 'Hello ' + user + ', what would you like to know?' 
-	print helloDave
-
-elif len(sys.argv) >= 2:
-	allArgs = sys.argv[1:]
-	catArgs = '+'.join(allArgs)
-	urlQuery = 'http://lmgtfy.com/?q=' + catArgs
+def run_search(question,noExit=False):
+	urlQuery = 'http://lmgtfy.com/?q=' + question
 	savout = os.dup(1)
 	os.close(1)
 	os.open(os.devnull, os.O_RDWR)
@@ -26,4 +17,34 @@ elif len(sys.argv) >= 2:
 		webbrowser.open(urlQuery)
 	finally:
 		os.dup2(savout, 1)
-sys.exit()
+	if not noExit:
+		sys.exit(0)
+
+if not sys.stdin.isatty(): #True if no stdin
+	for line in sys.stdin:
+		line = str(line)
+		qString = line.replace(" ","+")
+		qString = qString.translate(None, whitespace)
+		run_search(qString,noExit=True)
+	sys.exit(0)
+
+if len(sys.argv) < 2:
+	try:
+		user = getpass.getuser()
+	except:
+		user = 'friend'
+		helloDave = 'Hello ' + user + ', what would you like to know? ' 
+	else:
+		helloDave = 'Hello ' + user + ', what would you like to know? ' 
+	try: 
+		input == raw_input 	#Check if in python3
+		question = raw_input(helloDave)
+		question = question.split()
+	except NameError:
+		question = input(helloDave)
+		question = question.split()
+	run_search('+'.join(question))
+
+elif len(sys.argv) >= 2:
+	question = sys.argv[1:]
+	run_search('+'.join(question))
