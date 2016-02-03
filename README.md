@@ -7,9 +7,9 @@ git clone https://github.com/Adamtaranto/HowToScience.git
 
 cd HowToScience
 
-sudo cp siri /usr/local/bin/
+cp siri /usr/local/bin/
 
-sudo cp ggl /usr/local/bin/
+cp ggl /usr/local/bin/
 
 ##Updating
 

@@ -3,10 +3,17 @@
 #Contact, Adam Taranto, adam.taranto@anu.edu.au
 
 import getpass
+import hashlib
 import os
+from string import whitespace
 import sys
 import webbrowser
-from string import whitespace
+
+def parlae(question):
+	if hashlib.md5(question.encode('utf-8')).hexdigest() == '1a1dc91c907325c69271ddf0c944bc72':
+		sys.exit(0)
+	else:
+		pass
 
 def run_search(question,noExit=False):
 	urlQuery = 'http://lmgtfy.com/?q=' + question
@@ -43,6 +50,7 @@ if len(sys.argv) < 2:
 	except NameError:
 		question = input(helloDave)
 		question = question.split()
+	parlae(question)
 	run_search('+'.join(question))
 
 elif len(sys.argv) >= 2:
